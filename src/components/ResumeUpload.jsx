@@ -14,13 +14,14 @@ const gradient = "linear-gradient(135deg, #3B82F6, #8B5CF6, #22C55E)";
 export default function ResumeUpload({ feedbackExperience }) {
   const flagsmith = useFlagsmith();
 
-  const trackImprovementCompleted = () => {
-    const alreadyTracked = localStorage.getItem(
-      "resumeboost_conversion_sent"
-    );
+  const trackImprovementCompleted = async () => {
+  const alreadyTracked = localStorage.getItem(
+    "resumeboost_conversion_sent"
+  );
 
-    if (alreadyTracked) return;
+  if (alreadyTracked) return;
 
+  try {
     flagsmith.trackEvent("resume_improvement_completed", {
       value: 1,
       metadata: {
@@ -28,9 +29,15 @@ export default function ResumeUpload({ feedbackExperience }) {
       },
     });
 
+    await flagsmith.flushEvents();
+
     localStorage.setItem("resumeboost_conversion_sent", "true");
-    console.log("Conversion event tracked!");
-  };
+
+    console.log("Conversion event sent successfully!");
+  } catch (error) {
+    console.error("Conversion tracking failed:", error);
+  }
+};
 
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
