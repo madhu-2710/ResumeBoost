@@ -18,7 +18,6 @@ function HomePage() {
   const experimentFlag = useExperiment("resume_feedback_experience");
 
 const feedbackExperience = experimentFlag?.value ?? "loading";
-console.log("Flagsmith assigned variation:", feedbackExperience);
   return <ResumeUpload feedbackExperience={feedbackExperience} />;
 }
 
