@@ -28,7 +28,7 @@ export default function App() {
   return (
     <FlagsmithProvider
       options={{
-        environmentID: "8rQyjrLChnSD3b9KZCwYAX",
+        environmentID: import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID,
         identity: visitorId,
         enableEvents: true,
       }}

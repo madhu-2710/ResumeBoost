@@ -64,7 +64,7 @@ export default function ResumeUpload({ feedbackExperience }) {
       formData.append("resume", file);
 
       const response = await fetch(
-        "http://localhost:5000/api/resume/analyze",
+        "https://resumeboost-u63n.onrender.com/api/resume/analyze",
         {
           method: "POST",
           body: formData,
